@@ -146,68 +146,109 @@ html {
 
 .header {
     width: 100%;
-    height: 120px;
+    height: 160px;
     background: var(--primary-black-1);
     position: fixed;
     z-index: 999;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    padding: 0 5% 0;
+    padding: 1% 5% 1%;
+    box-shadow: 0px 0px 5px 1px var(--shadow-black);
+
+    .header-left, .header-right {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+    }
 
     .title-page {
         @include font(5rem, 700, var(--primary-white), 1px, none);
     }
 
+    .path-container {
+        @include font(1.3rem, 700, var(--primary-white), 2px, uppercase);
+        margin-top: 25px;
+    }
+
     .discover {
-        @include font(2.25rem, 700, var(--primary-white), 1px, none);
+        @include font(1.5rem, 700, var(--primary-white), 3px, none);
         cursor: pointer;
         background: transparent;
-        border: none;
+        background: transparent;
+        border: none; outline: none;
+        position: relative;
+        text-transform: uppercase;
 
+        &::before {
+            content: "";
+            width: 0;
+            height: 1px;
+            background: var(--primary-orange);
+            display: block;
+            transition: 0.4s ease;
+            margin-bottom: 10px;
+        }
+
+        &:focus::before, &:hover::before {
+            width: 100%;
+            transition: 0.4s ease;
+        }
+
+        // apparition of menu when click
         &:focus > ul {
             display: block;
         }
 
         ul {
+            width: 250px;
             list-style-type: none;
             background: var(--second-black-1);
-            box-shadow: 0px 0px 2.5px 2px var(--shadow-black);
-            padding: 15px 35px;
             display: none;
-            border: none;
+            position: absolute;
+            right: 0; top: 100%;
+            z-index: 100;
 
             li {
                 @include font(2rem, 600, var(--primary-white), 1px, none);
-                padding: 10px;
-                border: none;
+                padding: 15px 25px;
+                border: 1px solid var(--shadow-black);
+                border-bottom: none;
+            }
+
+            .last {
+                border-bottom: 1px solid var(--shadow-black);
             }
         }
+    }
+    
+    .actions {
+        width: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .select-all {
+        width: 20px; height: 20px;
+        background: var(--second-black-2);
+    }
+
+    .download {
+        font-size: 18px;
     }
 }
 
 .main-container {
     background: var(--primary-black-1);
     position: absolute;
-    top: 120px; right: 0; bottom: 0; left: 0;
-}
-
-.path-container {
-    position: fixed;
-    top: 120px; left: 0; right: 0;
-    height: 60px;
-    background: var(--second-black-2);
-    border-top: 1px solid var(--shadow-black);
-    border-bottom: 1px solid var(--shadow-black);
-    @include font(1.7rem, 600, var(--primary-white), 1.5px, none);
-    display: flex;
-    align-items: center;
-    padding: 0 1% 0;
+    top: 160px; right: 0; bottom: 0; left: 0;
 }
 
 .gallery-outer {
     position: absolute;
-    top: 60px; right: 0; bottom: 0; left: 0;
+    top: 0; right: 0; bottom: 0; left: 0;
     width: 100%;
     overflow-y: auto;
     display: flex;
@@ -219,7 +260,7 @@ html {
 }
 
 .square {
-    width: 20%;
+    width: calc(100% / 6);
     border: 1px solid var(--shadow-black);
     position: relative;
 
@@ -243,14 +284,34 @@ html {
             height: 100%;
             opacity: 0;
             background: var(--second-black-1);
-            transition: 0.5s ease;
+            transition: 0.4s ease;
             z-index: -1;
         }
 
-        &:hover::after, &:hover > h1 {
+        &:hover::after, &:hover > h1,
+        &:hover > .select, &:hover > i {
             cursor: pointer;
             opacity: 1;
-            transition: 0.5s ease;
+            transition: 0.4s ease;
+        }
+
+        .select {
+            width: 20px; height: 20px;
+            position: absolute;
+            top: 6%; right: 6%;
+            transition: 0.4s ease;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        i {
+            font-size: 18px;
+            margin-top: 10px;
+            position: absolute;
+            top: 15%; right: 6.5%;
+            transition: 0.4s ease;
+            opacity: 0;
+            z-index: 1;
         }
 
         h1 {
@@ -258,8 +319,8 @@ html {
             position: absolute;
             bottom: 0;
             margin: 6% 10%;
+            transition: 0.4s ease;
             opacity: 0;
-            transition: 0.5s ease;
             z-index: 1;
         }
     }
