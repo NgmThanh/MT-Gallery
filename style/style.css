@@ -120,7 +120,7 @@ html {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 1% 5% 1%;
+  padding: 1% 5% 35px;
   -webkit-box-shadow: 0px 0px 5px 1px var(--shadow-black);
           box-shadow: 0px 0px 5px 1px var(--shadow-black);
 }
@@ -133,8 +133,10 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-line-pack: justify;
-      align-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
 }
 
 .header .title-page {
@@ -151,7 +153,6 @@ html {
   color: var(--primary-white);
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-top: 25px;
 }
 
 .header .discover {
@@ -162,11 +163,11 @@ html {
   text-transform: none;
   cursor: pointer;
   background: transparent;
-  background: transparent;
   border: none;
   outline: none;
   position: relative;
   text-transform: uppercase;
+  padding: 5px 0 10px;
 }
 
 .header .discover::before {
@@ -217,7 +218,7 @@ html {
 }
 
 .header .actions {
-  width: 50px;
+  width: 65px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -231,6 +232,8 @@ html {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
 }
 
 .header .select-all {
@@ -323,8 +326,13 @@ html {
   right: 6%;
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
-  opacity: 0;
   z-index: 1;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.square__inner .select:checked {
+  opacity: 1;
 }
 
 .square__inner i {
@@ -335,8 +343,9 @@ html {
   right: 6.5%;
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
-  opacity: 0;
   z-index: 1;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .square__inner h1 {

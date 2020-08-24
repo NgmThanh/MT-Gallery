@@ -153,13 +153,14 @@ html {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 1% 5% 1%;
+    padding: 1% 5% 35px;
     box-shadow: 0px 0px 5px 1px var(--shadow-black);
 
     .header-left, .header-right {
         display: flex;
         flex-direction: column;
-        align-content: space-between;
+        justify-content: space-between;
+        height: 100%;
     }
 
     .title-page {
@@ -168,17 +169,16 @@ html {
 
     .path-container {
         @include font(1.3rem, 700, var(--primary-white), 2px, uppercase);
-        margin-top: 25px;
     }
 
     .discover {
         @include font(1.5rem, 700, var(--primary-white), 3px, none);
         cursor: pointer;
         background: transparent;
-        background: transparent;
         border: none; outline: none;
         position: relative;
         text-transform: uppercase;
+        padding: 5px 0 10px;
 
         &::before {
             content: "";
@@ -223,11 +223,12 @@ html {
     }
     
     .actions {
-        width: 50px;
+        width: 65px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        align-self: flex-end;
     }
 
     .select-all {
@@ -300,8 +301,13 @@ html {
             position: absolute;
             top: 6%; right: 6%;
             transition: 0.4s ease;
-            opacity: 0;
             z-index: 1;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .select:checked {
+            opacity: 1;
         }
 
         i {
@@ -310,8 +316,9 @@ html {
             position: absolute;
             top: 15%; right: 6.5%;
             transition: 0.4s ease;
-            opacity: 0;
             z-index: 1;
+            opacity: 0;
+            cursor: pointer;
         }
 
         h1 {
