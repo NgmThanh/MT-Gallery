@@ -24,10 +24,6 @@
 /* ========== COLORS ========== */
 /* ============================ */
 :root {
-  --black-0: #000;
-  --black-1: #222222;
-  --black-2: #303030;
-  --grey-0: #8f8f8f;
   --primary-black-1: #1F1E1D;
   --primary-black-2: #111;
   --primary-gray: #f2f2f2;
@@ -105,27 +101,36 @@ html {
   background-color: var(--primary-orange);
 }
 
+/* ========== HEADER ========== */
 .header {
   width: 100%;
   height: 160px;
   background: var(--primary-black-1);
   position: fixed;
   z-index: 999;
+  padding: 25px 5% 30px;
+  -webkit-box-shadow: 0px 0px 5px 1px var(--shadow-black);
+          box-shadow: 0px 0px 5px 1px var(--shadow-black);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 1% 5% 35px;
-  -webkit-box-shadow: 0px 0px 5px 1px var(--shadow-black);
-          box-shadow: 0px 0px 5px 1px var(--shadow-black);
+  /* left - right section of header */
+  /* menu discover */
+  /* actions : SELECT ALL - DOWNLOAD */
 }
 
 .header .header-left, .header .header-right {
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -136,7 +141,12 @@ html {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 100%;
+}
+
+.header .header-right {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .header .title-page {
@@ -156,18 +166,29 @@ html {
 }
 
 .header .discover {
+  width: 100px;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary-white);
   letter-spacing: 3px;
-  text-transform: none;
-  cursor: pointer;
+  text-transform: uppercase;
   background: transparent;
+  position: relative;
   border: none;
   outline: none;
-  position: relative;
-  text-transform: uppercase;
-  padding: 5px 0 10px;
+  cursor: pointer;
+  -webkit-transition: .4s ease;
+  transition: .4s ease;
+  /* line top */
+  /* line bottom */
+  /* animation on hover and focus */
+  /* list menu elements */
+}
+
+.header .discover:hover, .header .discover:focus {
+  color: var(--primary-orange);
+  -webkit-transition: .4s ease;
+  transition: .4s ease;
 }
 
 .header .discover::before {
@@ -178,11 +199,28 @@ html {
   display: block;
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
-  margin-bottom: 10px;
+  margin-bottom: 7.5px;
+}
+
+.header .discover::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: var(--primary-white);
+  display: block;
+  margin-top: 7.5px;
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
 }
 
 .header .discover:focus::before, .header .discover:hover::before {
   width: 100%;
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+.header .discover:focus::after, .header .discover:hover::after {
+  width: 0%;
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
 }
@@ -195,11 +233,11 @@ html {
   width: 250px;
   list-style-type: none;
   background: var(--second-black-1);
-  display: none;
   position: absolute;
   right: 0;
   top: 100%;
   z-index: 100;
+  display: none;
 }
 
 .header .discover ul li {
@@ -218,32 +256,71 @@ html {
 }
 
 .header .actions {
-  width: 65px;
+  width: 200px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-flow: row;
+          flex-flow: row;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
 }
 
-.header .select-all {
-  width: 20px;
-  height: 20px;
-  background: var(--second-black-2);
+.header .actions div {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-white);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
 }
 
-.header .download {
-  font-size: 18px;
+.header .actions div:hover, .header .actions div:focus {
+  color: var(--primary-orange);
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+.header .actions div::before {
+  content: "";
+  width: 0;
+  height: 1px;
+  display: block;
+  background: var(--primary-orange);
+  margin-bottom: 5px;
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+.header .actions div::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  display: block;
+  background: var(--primary-white);
+  margin-top: 5px;
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+.header .actions div:hover::after {
+  width: 0%;
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+.header .actions div:hover::before {
+  width: 100%;
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
 }
 
 .main-container {
@@ -256,13 +333,14 @@ html {
 }
 
 .gallery-outer {
+  width: 100%;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  width: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
+  padding: 1%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -270,13 +348,12 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
-  -ms-flex-line-pack: start;
-      align-content: flex-start;
-  padding: 1%;
-  overflow-y: scroll;
+          justify-content: flex-start;
 }
 
 .square {
@@ -303,10 +380,10 @@ html {
   display: block;
   width: 100%;
   height: 100%;
-  opacity: 0;
   background: var(--second-black-1);
   -webkit-transition: 0.4s ease;
   transition: 0.4s ease;
+  opacity: 0;
   z-index: -1;
 }
 

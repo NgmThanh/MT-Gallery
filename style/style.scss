@@ -27,11 +27,6 @@
 /* ============================ */
 
 :root {
-    --black-0: #000;
-    --black-1: #222222;
-    --black-2: #303030;
-    --grey-0: #8f8f8f;
-
     --primary-black-1: #1F1E1D;
     --primary-black-2: #111;
     --primary-gray: #f2f2f2;
@@ -144,23 +139,27 @@ html {
     background-color: var(--primary-orange);
 }
 
+/* ========== HEADER ========== */
+
 .header {
-    width: 100%;
-    height: 160px;
+    width: 100%; height: 160px;
     background: var(--primary-black-1);
     position: fixed;
     z-index: 999;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 1% 5% 35px;
+    padding: 25px 5% 30px;
     box-shadow: 0px 0px 5px 1px var(--shadow-black);
+    @include flex(row, flex-start, space-between);
 
+    /* left - right section of header */
     .header-left, .header-right {
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100%;
+    }
+
+    .header-right {
+        align-items: flex-end;
     }
 
     .title-page {
@@ -171,27 +170,49 @@ html {
         @include font(1.3rem, 700, var(--primary-white), 2px, uppercase);
     }
 
+    /* menu discover */
     .discover {
-        @include font(1.5rem, 700, var(--primary-white), 3px, none);
-        cursor: pointer;
+        width: 100px;
+        @include font(1.5rem, 700, var(--primary-white), 3px, uppercase);
         background: transparent;
-        border: none; outline: none;
         position: relative;
-        text-transform: uppercase;
-        padding: 5px 0 10px;
+        border: none; outline: none;
+        cursor: pointer;
+        transition: .4s ease;
 
+        &:hover, &:focus {
+            color: var(--primary-orange);
+            transition: .4s ease;
+        }
+
+        /* line top */
         &::before {
             content: "";
-            width: 0;
-            height: 1px;
+            width: 0; height: 1px;
             background: var(--primary-orange);
             display: block;
             transition: 0.4s ease;
-            margin-bottom: 10px;
+            margin-bottom: 7.5px;
         }
 
+        /* line bottom */
+        &::after {
+            content: "";
+            width: 100%; height: 1px;
+            background: var(--primary-white);
+            display: block;
+            margin-top: 7.5px;
+            transition: 0.4s ease;
+        }
+
+        /* animation on hover and focus */
         &:focus::before, &:hover::before {
             width: 100%;
+            transition: 0.4s ease;
+        }
+
+        &:focus::after, &:hover::after {
+            width: 0%;
             transition: 0.4s ease;
         }
 
@@ -200,14 +221,15 @@ html {
             display: block;
         }
 
+        /* list menu elements */
         ul {
             width: 250px;
             list-style-type: none;
             background: var(--second-black-1);
-            display: none;
             position: absolute;
             right: 0; top: 100%;
             z-index: 100;
+            display: none;
 
             li {
                 @include font(2rem, 600, var(--primary-white), 1px, none);
@@ -222,22 +244,49 @@ html {
         }
     }
     
+    /* actions : SELECT ALL - DOWNLOAD */
     .actions {
-        width: 65px;
+        width: 200px;
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        align-self: flex-end;
-    }
+        @include flex(row, center, space-between);
 
-    .select-all {
-        width: 20px; height: 20px;
-        background: var(--second-black-2);
-    }
+        div {
+            @include font(1.2rem, 600, var(--primary-white), 2px, uppercase);
+            transition: 0.4s ease;
 
-    .download {
-        font-size: 18px;
+            &:hover, &:focus {
+                color: var(--primary-orange);
+                transition: 0.4s ease;
+            }
+
+            &::before {
+                content: "";
+                width: 0; height: 1px;
+                display: block;
+                background: var(--primary-orange);
+                margin-bottom: 5px;
+                transition: 0.4s ease;
+            }
+
+            &::after {
+                content: "";
+                width: 100%; height: 1px;
+                display: block;
+                background: var(--primary-white);
+                margin-top: 5px;
+                transition: 0.4s ease;
+            }
+
+            &:hover::after {
+                width: 0%;
+                transition: 0.4s ease;
+            }
+
+            &:hover::before {
+                width: 100%;
+                transition: 0.4s ease;
+            }
+        }
     }
 }
 
@@ -248,16 +297,12 @@ html {
 }
 
 .gallery-outer {
+    width: 100%;
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    width: 100%;
-    overflow-y: auto;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: start;
-    align-content: flex-start;
-    padding: 1%;
     overflow-y: scroll;
+    padding: 1%;
+    @include flex(row wrap, flex-start, flex-start);
 }
 
 .square {
@@ -274,21 +319,21 @@ html {
 
     &__inner {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        width: 100%; height: 100%;
         background: var(--second-black-2);
 
+        // darken background on hover
         &::after {
             content: "";
             display: block;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
+            width: 100%; height: 100%;
             background: var(--second-black-1);
             transition: 0.4s ease;
+            opacity: 0;
             z-index: -1;
         }
 
+        // apparition elements on hover
         &:hover::after, &:hover > h1,
         &:hover > .select, &:hover > i {
             cursor: pointer;
@@ -296,6 +341,7 @@ html {
             transition: 0.4s ease;
         }
 
+        // checkbox
         .select {
             width: 20px; height: 20px;
             position: absolute;
@@ -310,6 +356,7 @@ html {
             opacity: 1;
         }
 
+        // download button
         i {
             font-size: 18px;
             margin-top: 10px;
@@ -321,6 +368,7 @@ html {
             cursor: pointer;
         }
 
+        // title image
         h1 {
             @include font(2rem, 600, var(--primary-white), 1px, none);
             position: absolute;
@@ -332,6 +380,7 @@ html {
         }
     }
 
+    // title folder always displayed
     .folder h1 {
         opacity: 1;
     }
