@@ -146,7 +146,7 @@ html {
     background: var(--primary-black-1);
     position: fixed;
     z-index: 999;
-    padding: 25px 5% 30px;
+    padding: 25px 5% 20px;
     box-shadow: 0px 0px 5px 1px var(--shadow-black);
     @include flex(row, flex-start, space-between);
 
@@ -167,7 +167,32 @@ html {
     }
 
     .path-container {
-        @include font(1.3rem, 700, var(--primary-white), 2px, uppercase);
+        @include font(1.2rem, 600, var(--primary-white), 2px, uppercase);
+
+        p {
+            display: inline-block;
+            cursor: pointer;
+
+            &:hover, &:focus {
+                color: var(--primary-orange);
+                transition: 0.4s ease;
+            }
+
+            &::after {
+                content: "";
+                width: 100%; height: 1px;
+                display: block;
+                background: var(--primary-orange);
+                margin-top: 5px;
+                transform: scaleX(0);
+                transition: 0.4s ease;
+            }
+
+            &:hover::after {
+                transform: scaleX(1);
+                transition: 0.4s ease;
+            }
+        }
     }
 
     /* menu discover */
@@ -178,41 +203,28 @@ html {
         position: relative;
         border: none; outline: none;
         cursor: pointer;
+        padding-bottom: 5px;
         transition: .4s ease;
 
         &:hover, &:focus {
             color: var(--primary-orange);
-            transition: .4s ease;
+            transition: 0.4s ease;
         }
 
-        /* line top */
+        /* line top and bottom */
         &::before {
             content: "";
-            width: 0; height: 1px;
+            width: 100%; height: 1px;
             background: var(--primary-orange);
             display: block;
-            transition: 0.4s ease;
-            margin-bottom: 7.5px;
-        }
-
-        /* line bottom */
-        &::after {
-            content: "";
-            width: 100%; height: 1px;
-            background: var(--primary-white);
-            display: block;
-            margin-top: 7.5px;
+            transform: scaleX(0);
+            margin-bottom: 5px;
             transition: 0.4s ease;
         }
-
+        
         /* animation on hover and focus */
         &:focus::before, &:hover::before {
-            width: 100%;
-            transition: 0.4s ease;
-        }
-
-        &:focus::after, &:hover::after {
-            width: 0%;
+            transform: scaleX(1);
             transition: 0.4s ease;
         }
 
@@ -252,38 +264,27 @@ html {
 
         div {
             @include font(1.2rem, 600, var(--primary-white), 2px, uppercase);
+            cursor: pointer;
             transition: 0.4s ease;
 
             &:hover, &:focus {
                 color: var(--primary-orange);
                 transition: 0.4s ease;
-            }
 
-            &::before {
-                content: "";
-                width: 0; height: 1px;
-                display: block;
-                background: var(--primary-orange);
-                margin-bottom: 5px;
-                transition: 0.4s ease;
             }
 
             &::after {
                 content: "";
                 width: 100%; height: 1px;
                 display: block;
-                background: var(--primary-white);
+                background: var(--primary-orange);
                 margin-top: 5px;
+                transform: scaleX(0);
                 transition: 0.4s ease;
             }
 
             &:hover::after {
-                width: 0%;
-                transition: 0.4s ease;
-            }
-
-            &:hover::before {
-                width: 100%;
+                transform: scaleX(1);
                 transition: 0.4s ease;
             }
         }
@@ -343,17 +344,40 @@ html {
 
         // checkbox
         .select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            // custom styling checkbox
             width: 20px; height: 20px;
+            padding: 2px;
+            border: none;
+            border-radius: 2px;
+            background: var(--primary-white);
             position: absolute;
             top: 6%; right: 6%;
             transition: 0.4s ease;
+            outline: none;
             z-index: 1;
             opacity: 0;
             cursor: pointer;
+
+            &:not(:checked):hover {
+                background: var(--primary-orange);
+            }
         }
 
         .select:checked {
+            background: var(--primary-orange);
             opacity: 1;
+
+            &:before {
+                font-family: FontAwesome;
+                content: '\f00c';
+                display: block;
+                color: var(--primary-white);
+                font-size: 16px;
+                position: absolute;
+              }
         }
 
         // download button
@@ -366,6 +390,11 @@ html {
             z-index: 1;
             opacity: 0;
             cursor: pointer;
+
+            &:hover {
+                color: var(--primary-orange);
+                transition: 0.4s ease;
+            }
         }
 
         // title image
